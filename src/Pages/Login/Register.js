@@ -2,8 +2,8 @@ import React from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
-import { useNavigation } from 'react-day-picker';
+import { Link, useNavigate, } from 'react-router-dom';
+
 
 const Register = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -16,7 +16,7 @@ const Register = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password)
@@ -27,15 +27,15 @@ const Register = () => {
 
     let signInError;
 
-    if (loading || gLoading) {
-        return <button class="btn loading">loading</button>
+    if (loading || gLoading || updating) {
+        return <button className="btn loading">loading</button>
     }
 
-    if (error || gError) {
-        signInError = <p className='text-red-600'>{error?.message || gError?.message}</p>
+    if (error || gError || updateError) {
+        signInError = <p className='text-red-600'>{error?.message || gError?.message || updateError?.message}</p>
     }
 
-    if (user || gUser || updateError) {
+    if (user || gUser) {
         console.log(gUser)
     }
     return (
@@ -63,7 +63,7 @@ const Register = () => {
                             <label className="label"><font></font>
 
 
-                                {errors.name?.type === 'required' && <span class="label-text-alt text-red-600">{errors.name.message}</span>}
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-600">{errors.name.message}</span>}
 
 
                             </label><font></font>
@@ -88,8 +88,8 @@ const Register = () => {
                             <label className="label"><font></font>
 
 
-                                {errors.email?.type === 'required' && <span class="label-text-alt text-red-600">{errors.email.message}</span>}
-                                {errors.email?.type === 'pattern' && <span class="label-text-alt text-red-600">{errors.email.message}</span>}
+                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-600">{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-600">{errors.email.message}</span>}
 
 
                             </label><font></font>
@@ -114,8 +114,8 @@ const Register = () => {
                             <label className="label"><font></font>
 
 
-                                {errors.password?.type === 'required' && <span class="label-text-alt text-red-600">{errors.password.message}</span>}
-                                {errors.password?.type === 'pattern' && <span class="label-text-alt text-red-600">{errors.password.message}</span>}
+                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
+                                {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
 
 
                             </label><font></font>

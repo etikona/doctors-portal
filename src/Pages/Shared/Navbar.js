@@ -25,6 +25,7 @@ const Navbar = () => {
             <li><Link to="/review">Review</Link></li><font></font>
             <li><Link to="/contact">Contact</Link></li><font></font>
             <li><Link to="/about">About</Link></li><font></font>
+            <li><Link to="/register">Sign up</Link></li><font></font>
             <li>{ user? <button class="btn btn-ghost" onClick={logout}>Sign Out</button> :<Link to="/login">Login</Link>}</li><font></font>
           </ul><font></font>
         </div><font></font>
@@ -38,6 +39,7 @@ const Navbar = () => {
             <li><Link to="/contact">Contact</Link></li><font></font>
             <li><Link to="/about">About</Link></li><font></font>
             <li><Link to="/login">Login</Link></li><font></font>
+            <li><Link to="/register">Sign up</Link></li><font></font>
        
         </ul><font></font>
       </div><font></font>
